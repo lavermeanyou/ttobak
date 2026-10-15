@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>또박 마이크 진단</title>
+<style>body{font:18px -apple-system,sans-serif;margin:32px;max-width:760px}button{font-size:18px;padding:10px 16px;margin:4px}
+#bar{height:24px;background:#ddd;margin:12px 0}#fill{height:100%;width:0;background:#0b7}pre{background:#f4f4f4;padding:12px;white-space:pre-wrap}</style></head>
+<body>
+<h2>또박 마이크 진단</h2>
+<p>버튼을 <b>위에서부터 하나씩</b> 누르고, 누를 때마다 3초 동안 "아—" 소리를 내 주세요. 결과는 자동으로 전송돼요.</p>
+<button id="b">B 녹음 설정만</button>
+<button id="c">C 또박 녹음기</button>
+<button id="d">D 또박 녹음기 + 카메라 요청</button>
+<div id="bar"><div id="fill"></div></div>
+<pre id="log">대기 중</pre>
+<script type="module">
+import { Recorder } from '../recorder.js';
+const AUDIO_C = { channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false };
+let lines = [];
+const log = (m) => { lines.push(m); document.getElementById('log').textContent = lines.join('\n'); };
+const send = () => fetch('/__mictest?' + new URLSearchParams({ r: lines.join(' || ') })).catch(() => {});
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const dbfs = (p) => (20 * Math.log10(p + 1e-12)).toFixed(1);
+const fill = (lv) => { document.getElementById('fill').style.width = Math.round(lv * 100) + '%'; };
+const trackInfo = (s) => { const t = s.getAudioTracks()[0]; return `label="${t.label}" muted=${t.muted} readyState=${t.readyState}`; };
+
+async function testB() {
+  lines = ['[B 녹음 설정만]'];
+  let s;
+  try { s = await navigator.mediaDevices.getUserMedia({ audio: AUDIO_C }); }
+  catch (e) { log(`getUserMedia 실패: ${e.name} ${e.message}`); return send(); }
+  log('트랙: ' + trackInfo(s));
+  const ctx = new AudioContext(); await ctx.resume();
+  const an = ctx.createAnalyser(); an.fftSize = 2048; ctx.createMediaStreamSource(s).connect(an);
+  const buf = new Float32Array(2048); let peak = 0;
+  const t0 = performance.now();
+  while (performance.now() - t0 < 3000) { an.getFloatTimeDomainData(buf); for (const v of buf) peak = Math.max(peak, Math.abs(v)); fill(Math.min(1, peak * 3)); await sleep(30); }
+  log(`3초 최대: ${dbfs(peak)} dBFS → ${peak === 0 ? '완전 무음' : '소리 들어옴'}`);
+  s.getTracks().forEach((t) => t.stop()); ctx.close(); send();
+}
+
+async function testRecorder(withCamera) {
+  lines = [withCamera ? '[D 또박 녹음기 + 카메라 요청]' : '[C 또박 녹음기]'];
+  let s;
+  try { s = await navigator.mediaDevices.getUserMedia({ audio: AUDIO_C }); }
+  catch (e) { log(`getUserMedia 실패: ${e.name} ${e.message}`); return send(); }
+  let lvPeak = 0;
+  const rec = new Recorder({ onLevel: (lv, p) => { lvPeak = Math.max(lvPeak, p); fill(lv); } });
+  try { await rec.open(s); } catch (e) { log(`녹음기 열기 실패: ${e.message}`); return send(); }
+  log(`AudioContext: state=${rec.ctx.state} sampleRate=${rec.sampleRate}`);
+  let v = null;
+  if (withCamera) {
+    try { v = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 640 } }); log('카메라: 받음'); }
+    catch (e) { log(`카메라 실패: ${e.name}`); }
+    log('카메라 요청 뒤 오디오 트랙: ' + trackInfo(s));
+  } else {
+    log('오디오 트랙: ' + trackInfo(s));
+  }
+  await rec.start();
+  await sleep(3000);
+  const out = await rec.stop();
+  let p = 0; for (const x of out.samples) p = Math.max(p, Math.abs(x));
+  log(`녹음 ${out.duration.toFixed(2)}초, 녹음 파일 최대: ${dbfs(p)} dBFS, 레벨 미터 최대: ${dbfs(lvPeak)} dBFS → ${p === 0 ? '완전 무음' : '소리 들어옴'}`);
+  log(`AudioContext 마지막 상태: ${rec.ctx.state}`);
+  await rec.close(); s.getTracks().forEach((t) => t.stop()); if (v) v.getTracks().forEach((t) => t.stop());
+  send();
+}
+
+document.getElementById('b').onclick = testB;
+document.getElementById('c').onclick = () => testRecorder(false);
+document.getElementById('d').onclick = () => testRecorder(true);
+</script>
+</body></html>

@@ -1,0 +1,1077 @@
+{
+ "categories": [
+  {
+   "id": "contrast",
+   "name": "평음·격음·경음",
+   "desc": "ㄱ/ㅋ/ㄲ처럼 힘과 바람의 세기만 다른 소리를 구별해요."
+  },
+  {
+   "id": "fricative",
+   "name": "ㅅ·ㅆ",
+   "desc": "혀끝 바람소리. ㅆ은 더 세고 길게 내요."
+  },
+  {
+   "id": "vowel",
+   "name": "모음·입모양",
+   "desc": "입술을 동그랗게, 옆으로, 크게 — 거울처럼 보면서 연습해요."
+  },
+  {
+   "id": "coda",
+   "name": "받침·소리 바뀜",
+   "desc": "글자와 실제 소리가 다른 단어예요. [발음]을 보고 따라 해요."
+  },
+  {
+   "id": "sentence",
+   "name": "짧은 문장",
+   "desc": "끝 억양까지 함께 봐요. 물음은 끝을 올려요."
+  }
+ ],
+ "words": [
+  {
+   "id": "bul",
+   "text": "불",
+   "category": "contrast",
+   "focus": [
+    "B"
+   ],
+   "type": "word",
+   "hint": "입술을 가볍게 붙였다가 힘을 빼고 떼요.",
+   "pron": "불",
+   "phones": [
+    "B",
+    "U",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "불",
+     "pron": "불",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "round"
+    }
+   ],
+   "group": "bul-pul-ppul"
+  },
+  {
+   "id": "pul",
+   "text": "풀",
+   "category": "contrast",
+   "focus": [
+    "Ph"
+   ],
+   "type": "word",
+   "hint": "입술을 뗄 때 바람을 '후' 하고 세게 내보내요.",
+   "pron": "풀",
+   "phones": [
+    "Ph",
+    "U",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "풀",
+     "pron": "풀",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "round"
+    }
+   ],
+   "group": "bul-pul-ppul"
+  },
+  {
+   "id": "ppul",
+   "text": "뿔",
+   "category": "contrast",
+   "focus": [
+    "BB"
+   ],
+   "type": "word",
+   "hint": "입술과 목에 힘을 주고 바람 없이 단단하게 터뜨려요.",
+   "pron": "뿔",
+   "phones": [
+    "BB",
+    "U",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "뿔",
+     "pron": "뿔",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "round"
+    }
+   ],
+   "group": "bul-pul-ppul"
+  },
+  {
+   "id": "dal",
+   "text": "달",
+   "category": "contrast",
+   "focus": [
+    "D"
+   ],
+   "type": "word",
+   "hint": "혀끝을 윗잇몸에 대고 부드럽게 떼요.",
+   "pron": "달",
+   "phones": [
+    "D",
+    "A",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "달",
+     "pron": "달",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "dal-tal-ttal"
+  },
+  {
+   "id": "tal",
+   "text": "탈",
+   "category": "contrast",
+   "focus": [
+    "Th"
+   ],
+   "type": "word",
+   "hint": "혀끝을 떼면서 바람을 세게 내보내요.",
+   "pron": "탈",
+   "phones": [
+    "Th",
+    "A",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "탈",
+     "pron": "탈",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "dal-tal-ttal"
+  },
+  {
+   "id": "ttal",
+   "text": "딸",
+   "category": "contrast",
+   "focus": [
+    "DD"
+   ],
+   "type": "word",
+   "hint": "혀끝에 힘을 주고 바람 없이 짧게 떼요.",
+   "pron": "딸",
+   "phones": [
+    "DD",
+    "A",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "딸",
+     "pron": "딸",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "dal-tal-ttal"
+  },
+  {
+   "id": "jada",
+   "text": "자다",
+   "category": "contrast",
+   "focus": [
+    "J"
+   ],
+   "type": "word",
+   "hint": "혀를 입천장에 대고 힘을 빼고 시작해요.",
+   "pron": "자다",
+   "phones": [
+    "J",
+    "A",
+    "D",
+    "A"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "자",
+     "pron": "자",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "다",
+     "pron": "다",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "ja-cha-jja"
+  },
+  {
+   "id": "chada",
+   "text": "차다",
+   "category": "contrast",
+   "focus": [
+    "CHh"
+   ],
+   "type": "word",
+   "hint": "혀를 떼며 바람을 '치' 하고 세게 내요.",
+   "pron": "차다",
+   "phones": [
+    "CHh",
+    "A",
+    "D",
+    "A"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "차",
+     "pron": "차",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "다",
+     "pron": "다",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "ja-cha-jja"
+  },
+  {
+   "id": "jjada",
+   "text": "짜다",
+   "category": "contrast",
+   "focus": [
+    "JJ"
+   ],
+   "type": "word",
+   "hint": "목에 힘을 주고 바람 없이 단단하게 내요.",
+   "pron": "짜다",
+   "phones": [
+    "JJ",
+    "A",
+    "D",
+    "A"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "짜",
+     "pron": "짜",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "다",
+     "pron": "다",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "ja-cha-jja"
+  },
+  {
+   "id": "sada",
+   "text": "사다",
+   "category": "fricative",
+   "focus": [
+    "S"
+   ],
+   "type": "word",
+   "hint": "혀끝을 아랫니 뒤에 두고 바람을 부드럽게 내보내요.",
+   "pron": "사다",
+   "phones": [
+    "S",
+    "A",
+    "D",
+    "A"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "사",
+     "pron": "사",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "다",
+     "pron": "다",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "sa-ssa"
+  },
+  {
+   "id": "ssada",
+   "text": "싸다",
+   "category": "fricative",
+   "focus": [
+    "SS"
+   ],
+   "type": "word",
+   "hint": "혀끝에 힘을 주고 바람을 더 세고 길게 내요.",
+   "pron": "싸다",
+   "phones": [
+    "SS",
+    "A",
+    "D",
+    "A"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "싸",
+     "pron": "싸",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "다",
+     "pron": "다",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "sa-ssa"
+  },
+  {
+   "id": "sal",
+   "text": "살",
+   "category": "fricative",
+   "focus": [
+    "S"
+   ],
+   "type": "word",
+   "hint": "바람을 부드럽게.",
+   "pron": "살",
+   "phones": [
+    "S",
+    "A",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "살",
+     "pron": "살",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "sal-ssal"
+  },
+  {
+   "id": "ssal",
+   "text": "쌀",
+   "category": "fricative",
+   "focus": [
+    "SS"
+   ],
+   "type": "word",
+   "hint": "바람을 세고 날카롭게.",
+   "pron": "쌀",
+   "phones": [
+    "SS",
+    "A",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "쌀",
+     "pron": "쌀",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    }
+   ],
+   "group": "sal-ssal"
+  },
+  {
+   "id": "geori",
+   "text": "거리",
+   "category": "vowel",
+   "focus": [
+    "EO"
+   ],
+   "type": "word",
+   "hint": "ㅓ는 입을 편하게 벌리고 혀를 뒤로.",
+   "pron": "거리",
+   "phones": [
+    "G",
+    "EO",
+    "R",
+    "I"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "거",
+     "pron": "거",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "리",
+     "pron": "리",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "spread"
+    }
+   ],
+   "group": "geori-gori-guri"
+  },
+  {
+   "id": "gori",
+   "text": "고리",
+   "category": "vowel",
+   "focus": [
+    "O"
+   ],
+   "type": "word",
+   "hint": "ㅗ는 입술을 동그랗게 모아요.",
+   "pron": "고리",
+   "phones": [
+    "G",
+    "O",
+    "R",
+    "I"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "고",
+     "pron": "고",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "round"
+    },
+    {
+     "text": "리",
+     "pron": "리",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "spread"
+    }
+   ],
+   "group": "geori-gori-guri"
+  },
+  {
+   "id": "guri",
+   "text": "구리",
+   "category": "vowel",
+   "focus": [
+    "U"
+   ],
+   "type": "word",
+   "hint": "ㅜ는 입술을 더 작고 동그랗게 앞으로 내밀어요.",
+   "pron": "구리",
+   "phones": [
+    "G",
+    "U",
+    "R",
+    "I"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "구",
+     "pron": "구",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "round"
+    },
+    {
+     "text": "리",
+     "pron": "리",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "spread"
+    }
+   ],
+   "group": "geori-gori-guri"
+  },
+  {
+   "id": "gim",
+   "text": "김",
+   "category": "vowel",
+   "focus": [
+    "I"
+   ],
+   "type": "word",
+   "hint": "ㅣ는 입꼬리를 옆으로 당겨요.",
+   "pron": "김",
+   "phones": [
+    "G",
+    "I",
+    "M"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "김",
+     "pron": "김",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "spread"
+    }
+   ],
+   "group": "gim-geum"
+  },
+  {
+   "id": "geum",
+   "text": "금",
+   "category": "vowel",
+   "focus": [
+    "EU"
+   ],
+   "type": "word",
+   "hint": "ㅡ는 입술을 옆으로 편 채 혀를 가운데로.",
+   "pron": "금",
+   "phones": [
+    "G",
+    "EU",
+    "M"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0
+   ],
+   "syllables": [
+    {
+     "text": "금",
+     "pron": "금",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "spread"
+    }
+   ],
+   "group": "gim-geum"
+  },
+  {
+   "id": "gukmul",
+   "text": "국물",
+   "category": "coda",
+   "focus": [
+    "NG"
+   ],
+   "type": "word",
+   "hint": "ㄱ 받침이 ㅁ 앞에서 [ㅇ]으로 바뀌어요.",
+   "pron": "궁물",
+   "phones": [
+    "G",
+    "U",
+    "NG",
+    "M",
+    "U",
+    "L"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "국",
+     "pron": "궁",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "round"
+    },
+    {
+     "text": "물",
+     "pron": "물",
+     "phones": [
+      3,
+      4,
+      5
+     ],
+     "lip": "round"
+    }
+   ]
+  },
+  {
+   "id": "gachi",
+   "text": "같이",
+   "category": "coda",
+   "focus": [
+    "CHh"
+   ],
+   "type": "word",
+   "hint": "ㅌ 받침이 ㅣ 앞에서 [ㅊ]으로 바뀌어요.",
+   "pron": "가치",
+   "phones": [
+    "G",
+    "A",
+    "CHh",
+    "I"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "같",
+     "pron": "가",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "이",
+     "pron": "치",
+     "phones": [
+      2,
+      3
+     ],
+     "lip": "spread"
+    }
+   ]
+  },
+  {
+   "id": "joayo",
+   "text": "좋아요",
+   "category": "coda",
+   "focus": [
+    "J"
+   ],
+   "type": "word",
+   "hint": "ㅎ 받침은 소리 나지 않아요.",
+   "pron": "조아요",
+   "phones": [
+    "J",
+    "O",
+    "A",
+    "iO"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    1,
+    2
+   ],
+   "syllables": [
+    {
+     "text": "좋",
+     "pron": "조",
+     "phones": [
+      0,
+      1
+     ],
+     "lip": "round"
+    },
+    {
+     "text": "아",
+     "pron": "아",
+     "phones": [
+      2
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "요",
+     "pron": "요",
+     "phones": [
+      3
+     ],
+     "lip": "round"
+    }
+   ]
+  },
+  {
+   "id": "hakgyo",
+   "text": "학교",
+   "category": "coda",
+   "focus": [
+    "GG"
+   ],
+   "type": "word",
+   "hint": "받침 ㄱ 뒤의 ㄱ은 [ㄲ]처럼 단단해져요.",
+   "pron": "학꾜",
+   "phones": [
+    "H",
+    "A",
+    "k",
+    "GG",
+    "iO"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "syllables": [
+    {
+     "text": "학",
+     "pron": "학",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "교",
+     "pron": "꾜",
+     "phones": [
+      3,
+      4
+     ],
+     "lip": "round"
+    }
+   ]
+  },
+  {
+   "id": "bap-st",
+   "text": "밥 먹었어요.",
+   "category": "sentence",
+   "focus": [
+    "M"
+   ],
+   "type": "statement",
+   "hint": "끝을 자연스럽게 내려요.",
+   "pron": "밥 머거써요",
+   "phones": [
+    "B",
+    "A",
+    "p",
+    "M",
+    "EO",
+    "G",
+    "EO",
+    "SS",
+    "EO",
+    "iO"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4
+   ],
+   "syllables": [
+    {
+     "text": "밥",
+     "pron": "밥",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "먹",
+     "pron": "머",
+     "phones": [
+      3,
+      4
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "었",
+     "pron": "거",
+     "phones": [
+      5,
+      6
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "어",
+     "pron": "써",
+     "phones": [
+      7,
+      8
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "요",
+     "pron": "요",
+     "phones": [
+      9
+     ],
+     "lip": "round"
+    }
+   ],
+   "group": "bap-st-q"
+  },
+  {
+   "id": "bap-q",
+   "text": "밥 먹었어요?",
+   "category": "sentence",
+   "focus": [
+    "M"
+   ],
+   "type": "question",
+   "hint": "끝 '요'를 올려서 물어봐요.",
+   "pron": "밥 머거써요",
+   "phones": [
+    "B",
+    "A",
+    "p",
+    "M",
+    "EO",
+    "G",
+    "EO",
+    "SS",
+    "EO",
+    "iO"
+   ],
+   "phone_syl": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4
+   ],
+   "syllables": [
+    {
+     "text": "밥",
+     "pron": "밥",
+     "phones": [
+      0,
+      1,
+      2
+     ],
+     "lip": "open"
+    },
+    {
+     "text": "먹",
+     "pron": "머",
+     "phones": [
+      3,
+      4
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "었",
+     "pron": "거",
+     "phones": [
+      5,
+      6
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "어",
+     "pron": "써",
+     "phones": [
+      7,
+      8
+     ],
+     "lip": "neutral"
+    },
+    {
+     "text": "요",
+     "pron": "요",
+     "phones": [
+      9
+     ],
+     "lip": "round"
+    }
+   ],
+   "group": "bap-st-q"
+  }
+ ]
+}

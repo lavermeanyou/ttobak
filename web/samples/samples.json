@@ -1,0 +1,65 @@
+{"note": "데모용 샘플. scripts/make_samples.sh 로 macOS 합성음(Yuna, 성인 여성)에서 만든 16 kHz mono wav. '오류 흉내'는 목표 단어 대신 오류가 난 단어를 합성해 대표 오류를 재현한 것. kind/expect 는 server/tests/test_e2e.py 가 쓰는 검증 정보.",
+ "samples": [
+  {"id": "ok-jjada", "label": "정상: 짜다", "word_id": "jjada", "text": "짜다", "pron": "짜다", "sentence_type": "word",
+   "file": "samples/ok-jjada.wav", "note": "된소리 ㅉ을 바르게 낸 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-jjada-chada", "label": "오류 흉내: 짜다 → 차다", "word_id": "jjada", "text": "짜다", "pron": "짜다", "sentence_type": "word",
+   "file": "samples/err-jjada-chada.wav", "note": "된소리 ㅉ을 거센소리 ㅊ처럼 낸 경우(예사·거센·된소리 대비 오류)", "kind": "error",
+   "expect": {"phones": [0], "heard": "CHh"}},
+
+  {"id": "ok-sori", "label": "정상: 소리", "word_id": "sori", "text": "소리", "pron": "소리", "sentence_type": "word",
+   "file": "samples/ok-sori.wav", "note": "ㅅ과 초성 ㄹ을 바르게 낸 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-sori-dori", "label": "오류 흉내: 소리 → 도리", "word_id": "sori", "text": "소리", "pron": "소리", "sentence_type": "word",
+   "file": "samples/err-sori-dori.wav", "note": "ㅅ을 혀로 막아 ㄷ처럼 낸 경우(마찰음 → 파열음)", "kind": "error",
+   "expect": {"phones": [0], "heard": "D"}},
+
+  {"id": "ok-oi", "label": "정상: 오이", "word_id": "oi", "text": "오이", "pron": "오이", "sentence_type": "word",
+   "file": "samples/ok-oi.wav", "note": "ㅗ에서 입술을 동그랗게 모은 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-oi-eoi", "label": "오류 흉내: 오이 → 어이", "word_id": "oi", "text": "오이", "pron": "오이", "sentence_type": "word",
+   "file": "samples/err-oi-eoi.wav", "note": "입술을 모으지 않아 ㅗ가 ㅓ처럼 된 경우(원순 모음)", "kind": "error",
+   "expect": {"phones": [0], "heard": "EO"}},
+
+  {"id": "ok-nara", "label": "정상: 나라", "word_id": "nara", "text": "나라", "pron": "나라", "sentence_type": "word",
+   "file": "samples/ok-nara.wav", "note": "초성 ㄹ을 혀끝으로 한 번 튕긴 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-nara-nada", "label": "오류 흉내: 나라 → 나다", "word_id": "nara", "text": "나라", "pron": "나라", "sentence_type": "word",
+   "file": "samples/err-nara-nada.wav", "note": "ㄹ을 튕기지 않고 ㄷ처럼 막아서 낸 경우", "kind": "error",
+   "expect": {"phones": [2], "heard": "D"}},
+
+  {"id": "ok-yagu", "label": "정상: 야구", "word_id": "yagu", "text": "야구", "pron": "야구", "sentence_type": "word",
+   "file": "samples/ok-yagu.wav", "note": "이중모음 ㅑ를 바르게 낸 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-yagu-agu", "label": "오류 흉내: 야구 → 아구", "word_id": "yagu", "text": "야구", "pron": "야구", "sentence_type": "word",
+   "file": "samples/err-yagu-agu.wav", "note": "이중모음 ㅑ를 ㅏ로 단순하게 낸 경우", "kind": "error",
+   "expect": {"phones": [0], "heard": "A"}},
+
+  {"id": "ok-ap", "label": "정상: 앞", "word_id": "ap", "text": "앞", "pron": "압", "sentence_type": "word",
+   "file": "samples/ok-ap.wav", "note": "받침 ㅂ을 입술을 닫은 채 멈춘 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-ap-apeu", "label": "오류 흉내: 앞 → 아프", "word_id": "ap", "text": "앞", "pron": "압", "sentence_type": "word",
+   "file": "samples/err-ap-apeu.wav", "note": "받침 ㅂ을 터뜨리고 뒤에 ㅡ를 덧붙인 경우", "kind": "error",
+   "expect": {"phones": [1], "insert": "EU"}},
+
+  {"id": "ok-where", "label": "정상: 어디 가요?", "word_id": "s_where", "text": "어디 가요?", "pron": "어디 가요", "sentence_type": "question",
+   "file": "samples/ok-where.wav", "note": "물음 끝을 올려 말한 발음(합성음). '어디'가 든 물음은 끝을 내려도 자연스러워요", "kind": "normal"},
+  {"id": "ok-name-fall", "label": "정상: 이름이 뭐예요? (끝을 내림)", "word_id": "s_name", "text": "이름이 뭐예요?", "pron": "이르미 뭐예요", "sentence_type": "question",
+   "file": "samples/ok-name-fall.wav", "note": "'뭐'가 든 설명 의문문을 끝을 내려 말한 자연스러운 억양(합성음)", "kind": "normal"},
+
+  {"id": "ok-like", "label": "정상: 좋아요? (끝을 올림)", "word_id": "s_like", "text": "좋아요?", "pron": "조아요", "sentence_type": "question",
+   "file": "samples/ok-like.wav", "note": "'예/아니요'로 답하는 물음의 끝을 올려 말한 기준 발음(합성음)", "kind": "normal"},
+  {"id": "err-like-flat", "label": "오류 흉내: 좋아요? → 끝을 내림", "word_id": "s_like", "text": "좋아요?", "pron": "조아요", "sentence_type": "question",
+   "file": "samples/err-like-flat.wav", "note": "'예/아니요'로 답하는 물음인데 대답처럼 끝을 내려 말한 경우(억양 오류)", "kind": "error",
+   "expect": {"feedback_kind": "intonation", "intonation_below": 50}},
+  {"id": "ok-okay", "label": "정상: 괜찮아요?", "word_id": "s_okay", "text": "괜찮아요?", "pron": "괜차나요", "sentence_type": "question",
+   "file": "samples/ok-okay.wav", "note": "이중모음 ㅙ와 물음 끝 올림을 바르게 낸 기준 발음(합성음)", "kind": "normal"},
+
+  {"id": "err-bada-mada", "label": "오류 흉내: 바다 → 마다", "word_id": "bada", "text": "바다", "pron": "바다", "sentence_type": "word",
+   "file": "samples/err-bada-mada.wav", "note": "ㅂ에 콧소리가 섞여 ㅁ처럼 된 경우(과비성)", "kind": "error",
+   "expect": {"phones": [0], "heard": "M"}},
+  {"id": "err-hello-coda", "label": "오류 흉내: 안녕하세요 → 아녕하세요", "word_id": "s_hello", "text": "안녕하세요", "pron": "안녕하세요", "sentence_type": "statement",
+   "file": "samples/err-hello-coda.wav", "note": "'안'의 받침 ㄴ을 빠뜨린 경우(받침 탈락)", "kind": "error",
+   "expect": {"phones": [1], "status": "del"}},
+
+  {"id": "ok-sagwa", "label": "정상: 사과", "word_id": "sagwa", "text": "사과", "pron": "사과", "sentence_type": "word",
+   "file": "samples/ok-sagwa.wav", "note": "ㅅ과 이중모음 ㅘ를 바르게 낸 기준 발음(합성음)", "kind": "normal"},
+  {"id": "ok-ot", "label": "정상: 옷", "word_id": "ot", "text": "옷", "pron": "옫", "sentence_type": "word",
+   "file": "samples/ok-ot.wav", "note": "받침 ㅅ을 [ㄷ]으로 막아 멈춘 기준 발음(합성음)", "kind": "normal"},
+  {"id": "ok-uija", "label": "정상: 의자", "word_id": "uija", "text": "의자", "pron": "의자", "sentence_type": "word",
+   "file": "samples/ok-uija.wav", "note": "이중모음 ㅢ를 바르게 낸 기준 발음(합성음)", "kind": "normal"}
+ ]}

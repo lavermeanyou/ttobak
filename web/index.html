@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>또박 — 눈으로 보는 발음 연습</title>
+  <meta name="description" content="인공와우 사용자를 위한 한국어 발음 연습. 내 발음을 글자·색·그래프·입모양으로 보여 줍니다.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b5c5e'/%3E%3Cpath d='M6 16Q16 8 26 16Q16 24 6 16Z' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // 저장된 테마를 그리기 전에 적용(깜빡임 방지)
+    try { var th = localStorage.getItem('ttobak.theme'); if (th === 'light' || th === 'dark') document.documentElement.setAttribute('data-theme', th); } catch (e) {}
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#practice">연습 카드로 건너뛰기</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">또박</span>
+      <span class="brand-sub">눈으로 보는 발음 연습</span>
+    </div>
+    <div class="topbar-tools">
+      <fieldset class="seg" id="voice-seg">
+        <legend class="seg-legend">기준 목소리</legend>
+        <label><input type="radio" name="voice" value="female" checked><span>성인 여성</span></label>
+        <label><input type="radio" name="voice" value="male"><span>성인 남성</span></label>
+        <label><input type="radio" name="voice" value="child"><span>아동</span></label>
+      </fieldset>
+      <span class="server-state" id="server-state" role="status">연결 확인 중</span>
+      <button type="button" class="btn btn-quiet" id="theme-btn"><span id="theme-label">테마: 자동</span><span class="visually-hidden"> — 눌러서 바꾸기</span></button>
+    </div>
+  </header>
+
+  <div class="mock-banner" id="mock-banner" hidden>
+    목업 모드 — 서버 없이 예시 결과로 화면을 보여 주는 중이에요. 실제 분석이 아닙니다.
+  </div>
+
+  <main class="layout">
+    <!-- 1열: 단어 목록 -->
+    <section class="col col-words" aria-labelledby="words-h">
+      <h2 class="col-title" id="words-h">연습할 말</h2>
+      <div class="tabs" role="tablist" id="cat-tabs" aria-label="연습 종류"></div>
+      <div role="tabpanel" id="word-panel" tabindex="-1">
+        <p class="cat-desc" id="cat-desc"></p>
+        <div class="word-list" id="word-list"><p class="muted">단어 목록을 불러오는 중…</p></div>
+      </div>
+
+      <form class="free" id="free-form" autocomplete="off">
+        <label class="free-label" for="free-text">직접 입력</label>
+        <div class="free-row">
+          <input id="free-text" name="text" type="text" maxlength="40" placeholder="예: 학교에 가요" lang="ko" enterkeyhint="go">
+          <button type="submit" class="btn">미리보기</button>
+        </div>
+        <p class="free-msg" id="free-msg" role="status"></p>
+      </form>
+
+      <section class="samples" id="samples" aria-labelledby="samples-h" hidden>
+        <h3 class="sub-title" id="samples-h">샘플로 체험</h3>
+        <p class="muted small">마이크가 없어도, 미리 녹음된 소리를 같은 방식으로 분석해 볼 수 있어요. (입술 데이터 없음)</p>
+        <ul class="sample-list" id="sample-list"></ul>
+      </section>
+    </section>
+
+    <!-- 2열: 연습 카드 + 카메라 -->
+    <section class="col col-practice" id="practice" aria-labelledby="practice-h" tabindex="-1">
+      <h2 class="col-title" id="practice-h">연습</h2>
+
+      <div class="target" id="target">
+        <p class="target-meta" id="target-meta"></p>
+        <p class="target-word" id="target-word" lang="ko">&nbsp;</p>
+        <p class="target-pron" id="target-pron" hidden></p>
+        <p class="target-tune" id="target-tune" hidden></p>
+        <div class="target-notes" id="target-notes" role="note" hidden></div>
+        <ol class="lip-guide" id="lip-guide" aria-label="음절별 입모양"></ol>
+        <p class="hint" id="target-hint" hidden></p>
+        <div class="target-actions">
+          <button type="button" class="btn btn-line" id="tts-btn" hidden>
+            <svg class="i" aria-hidden="true"><use href="#i-speaker"/></svg><span>기준 발음 듣기</span>
+          </button>
+          <span class="history-inline" id="history-inline"></span>
+        </div>
+      </div>
+
+      <!-- 녹음 도크: 카메라·자막·녹음 버튼·소리 크기. 넓은 화면에서는 연습 열 아래쪽에 붙어 늘 보인다 -->
+      <div class="dock" id="dock" data-video="off">
+        <div class="caption" id="caption" hidden></div>
+        <div class="stage">
+          <div class="camera" id="camera">
+            <video id="cam-video" playsinline muted autoplay aria-hidden="true"></video>
+            <canvas id="cam-overlay" aria-hidden="true"></canvas>
+            <div class="camera-empty" id="camera-empty">
+              <p class="camera-empty-title">카메라로 입모양을 함께 봐요</p>
+              <p class="muted small">영상은 이 기기 안에서만 처리돼요. 서버에는 입술 숫자만 보내요.</p>
+              <button type="button" class="btn btn-primary" id="media-btn">
+                <svg class="i" aria-hidden="true"><use href="#i-camera"/></svg><span>카메라·마이크 켜기</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="live" id="live" aria-hidden="true" hidden>
+            <div class="meter-row">
+              <span class="meter-label">입 벌림</span>
+              <span class="meter"><span class="meter-fill meter-fill--data" id="open-fill"></span><span class="meter-tick" id="open-tick" hidden></span></span>
+            </div>
+            <div class="meter-row">
+              <span class="meter-label">입 너비</span>
+              <span class="meter"><span class="meter-fill meter-fill--data" id="width-fill"></span><span class="meter-tick" id="width-tick" hidden></span></span>
+            </div>
+            <div class="live-shape">
+              <span class="live-shape-icon" id="live-shape-icon"></span>
+              <span><span class="muted small">지금 입모양(참고)</span><br><strong id="live-shape-text">—</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rec-bar">
+          <button type="button" class="btn btn-rec" id="rec-btn" aria-describedby="rec-help">
+            <svg class="i" aria-hidden="true"><use href="#i-mic"/></svg><span id="rec-label">녹음 시작</span>
+          </button>
+          <div class="rec-level" aria-hidden="true">
+            <span class="meter-label">소리</span>
+            <span class="meter"><span class="meter-fill" id="lv-fill"></span></span>
+            <span class="rec-time" id="rec-time">0.0 / 8초</span>
+          </div>
+          <button type="button" class="btn btn-line" id="replay-btn" disabled>
+            <svg class="i" aria-hidden="true"><use href="#i-play"/></svg><span>다시 듣기</span>
+          </button>
+        </div>
+        <p class="media-note" id="media-note" role="status"></p>
+      </div>
+      <p class="muted small" id="rec-help"><kbd>스페이스바</kbd>로 시작·정지해요. 다른 버튼이나 입력칸을 고른 상태에서는 스페이스바가 그 버튼을 눌러요. 시작하면 0.6초 동안 입을 다물고 기다렸다가 말해요. 최대 8초.</p>
+    </section>
+
+    <!-- 3열: 결과 -->
+    <section class="col col-result" id="result" aria-labelledby="result-h" aria-busy="false">
+      <h2 class="col-title" id="result-h">결과</h2>
+
+      <div class="result-empty" id="result-empty">
+        <p>녹음하면 여기에 결과가 나와요.</p>
+        <ul class="legend-list">
+          <li><span class="chip chip-ok"><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg>좋아요</span> 목표대로 들렸어요</li>
+          <li><span class="chip chip-warn"><svg class="i" aria-hidden="true"><use href="#i-warn"/></svg>아쉬워요</span> 비슷하지만 약하거나 흐려요</li>
+          <li><span class="chip chip-error"><svg class="i" aria-hidden="true"><use href="#i-error"/></svg>달라요</span> 다른 소리로 들렸거나 빠졌어요</li>
+        </ul>
+      </div>
+
+      <div class="result-loading" id="result-loading" hidden>
+        <div class="loading-bar"><span></span></div>
+        <p id="loading-text">소리를 분석하고 있어요…</p>
+      </div>
+
+      <div class="result-error" id="result-error" role="alert" hidden>
+        <svg class="i i-lg" aria-hidden="true"><use href="#i-error"/></svg>
+        <div>
+          <p class="result-error-title" id="error-title"></p>
+          <p id="error-body"></p>
+        </div>
+      </div>
+
+      <div class="result-body" id="result-body" hidden>
+        <div class="scores" id="scores"></div>
+        <div class="trend" id="trend"></div>
+
+        <div class="compare" id="compare"></div>
+        <ol class="syl-blocks" id="syl-blocks" aria-label="음절별 결과"></ol>
+
+        <h3 class="sub-title">이렇게 고쳐 보세요</h3>
+        <ul class="feedback" id="feedback"></ul>
+
+        <h3 class="sub-title">소리 하나하나</h3>
+        <ol class="phone-list" id="phone-list" aria-label="음소별 결과"></ol>
+
+        <figure class="chart" id="fig-prosody">
+          <figcaption>
+            <span class="chart-title">음높이와 크기</span>
+            <span class="chart-desc" id="prosody-desc">점은 목소리 높이, 선은 소리 크기예요. 아래 띠는 각 소리가 난 시간이에요.</span>
+          </figcaption>
+          <div class="chart-legend">
+            <span class="key"><span class="key-dot key-1"></span>음높이(Hz)</span>
+            <span class="key"><span class="key-line key-2"></span>크기(dB)</span>
+            <span class="key"><span class="key-band key-warn"></span>약함</span>
+            <span class="key"><span class="key-band key-error"></span>다르게 들림·빠짐</span>
+          </div>
+          <div class="chart-wrap"><canvas id="cv-prosody"></canvas></div>
+          <details class="chart-table"><summary>수치로 보기</summary><div id="prosody-table"></div></details>
+        </figure>
+
+        <figure class="chart" id="fig-formant">
+          <figcaption>
+            <span class="chart-title">모음 위치</span>
+            <span class="chart-desc">글자는 참고 모음(성인 평균값), 점은 내 모음이에요. 사람마다 차이가 커서 참고로만 보세요. 참고 범위 밖인 모음은 화살표로 가까워지는 방향을 보여 줘요.</span>
+          </figcaption>
+          <div class="chart-legend">
+            <span class="key"><span class="key-dot key-1"></span>내 모음</span>
+            <span class="key"><span class="key-glyph">ㅏ</span><span id="formant-ref-label">참고 모음(성인 여성)</span></span>
+            <span class="key"><span class="key-ring"></span>참고 범위 밖</span>
+          </div>
+          <div class="chart-wrap"><canvas id="cv-formant"></canvas></div>
+          <ul class="vowel-notes" id="vowel-notes"></ul>
+        </figure>
+
+        <figure class="chart" id="fig-lips">
+          <figcaption>
+            <span class="chart-title">입술 움직임</span>
+            <span class="chart-desc">카메라로 잰 입 벌림·너비·동그랗게 정도예요. 위쪽 표시는 소리마다 입모양이 맞았는지예요.</span>
+          </figcaption>
+          <div class="chart-legend" id="lips-legend">
+            <span class="key"><span class="key-line key-1"></span>입술 값</span>
+            <span class="key"><span class="key-band key-ok-soft"></span>입모양 맞음</span>
+            <span class="key"><span class="key-band key-warn-soft"></span>입모양 아쉬움</span>
+          </div>
+          <div class="chart-wrap" id="lips-wrap"><canvas id="cv-lips"></canvas></div>
+          <p class="muted small" id="lips-empty" hidden></p>
+          <ul class="lip-checks" id="lip-checks"></ul>
+        </figure>
+
+        <p class="meta" id="meta"></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="visually-hidden" id="sr-live" aria-live="polite" aria-atomic="true"></div>
+  <audio id="replay-audio" preload="auto"></audio>
+
+  <!-- 아이콘 -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.2L22 20.5H2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-error" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-rise" viewBox="0 0 24 24"><path d="M3 18h6l9-11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 6.5H18.5V12.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-fall" viewBox="0 0 24 24"><path d="M3 6h6l9 11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5 17.5H18.5V11.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-free" viewBox="0 0 24 24"><path d="M2.5 12h7l5-6.5h7M9.5 12l5 6.5h7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><rect x="2.5" y="6.5" width="13.5" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 10.5l5.5-3v9l-5.5-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  </svg>
+</body>
+</html>

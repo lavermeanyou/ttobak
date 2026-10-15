@@ -1,0 +1,4 @@
+{"samples": [
+  {"id": "dev-gukmul-yuna", "label": "국물 — 합성음(성인 여성)", "word_id": "gukmul", "text": "국물", "pron": "궁물",
+   "sentence_type": "word", "file": "dev/mock-gukmul.wav", "note": "개발용 목업 샘플. macOS 합성음성, 앞 0.6초 무음."}
+]}

@@ -1,0 +1,24 @@
+# 또박 서버 의존성 (Python 3.12, macOS Apple Silicon 에서 검증한 버전으로 고정)
+#   python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+# ffmpeg 는 pip 패키지가 아니다: brew install ffmpeg (wav 가 아닌 녹음 형식을 바꿀 때만 필요)
+
+# 인식 모델
+torch==2.14.1
+torchaudio==2.11.0
+transformers==5.19.0
+huggingface_hub==2.2.0      # scripts/run.sh 가 모델을 내려받을 때
+
+# 음향 분석·오디오 읽기
+numpy==2.5.4
+praat-parselmouth==0.4.7
+soundfile==0.14.0
+
+# 웹 서버
+fastapi==0.143.0
+starlette==1.8.0
+uvicorn==0.54.0
+python-multipart==0.0.32
+
+# 테스트
+pytest==9.1.1
+httpx==0.28.1
